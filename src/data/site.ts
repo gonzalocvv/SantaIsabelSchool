@@ -9,7 +9,8 @@ export const site = {
   name: 'Santa Isabel School',
   legalName: 'Instituto Educativo Santa Isabel (IESI)',
   domain: 'institutoeducativosantaisabel.edu.uy',
-  url: 'https://institutoeducativosantaisabel.edu.uy',
+  // Sincronizado con astro.config (`site`). Cae al dominio live actual.
+  url: import.meta.env.SITE ?? 'https://santaisabelschool.pages.dev',
   foundedYear: 1998, // según el logo institucional oficial ("EST. 1998")
   location: {
     city: 'Paso de los Toros',

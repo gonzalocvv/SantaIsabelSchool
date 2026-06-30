@@ -3,9 +3,13 @@ import { defineConfig } from 'astro/config';
 import tailwind from '@astrojs/tailwind';
 import sitemap from '@astrojs/sitemap';
 
-// Dominio institucional final (registrado, a poner en uso).
+// URL pública del sitio. Por ahora vive en Cloudflare Pages; cuando se conecte
+// el dominio .edu.uy, setear la env SITE_URL en Cloudflare y redeploy.
+// (Astro expone este valor como import.meta.env.SITE para canonical/OG/JSON-LD.)
+const SITE_URL = process.env.SITE_URL || 'https://santaisabelschool.pages.dev';
+
 export default defineConfig({
-  site: 'https://institutoeducativosantaisabel.edu.uy',
+  site: SITE_URL,
   i18n: {
     locales: ['es', 'en'],
     defaultLocale: 'es',
