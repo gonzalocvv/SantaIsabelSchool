@@ -1,0 +1,32 @@
+---
+interface Props {
+  href?: string;
+  variant?: 'primary' | 'outline' | 'whatsapp';
+  type?: 'button' | 'submit';
+  class?: string;
+  [key: string]: unknown;
+}
+
+const { href, variant = 'primary', type = 'button', class: extra = '', ...rest } = Astro.props;
+
+const base =
+  'inline-flex items-center justify-center gap-2 rounded-full px-6 py-3 text-base font-semibold transition duration-200 ease-out-soft active:scale-[0.97] focus-visible:outline-none';
+const variants: Record<string, string> = {
+  primary: 'bg-primary text-white shadow-soft hover:bg-primary-700',
+  outline: 'border border-primary/30 text-primary hover:border-primary hover:bg-primary/5',
+  whatsapp: 'bg-whatsapp text-white shadow-soft hover:brightness-95',
+};
+const cls = `${base} ${variants[variant]} ${extra}`;
+---
+
+{
+  href ? (
+    <a href={href} class={cls} {...rest}>
+      <slot />
+    </a>
+  ) : (
+    <button type={type} class={cls} {...rest}>
+      <slot />
+    </button>
+  )
+}

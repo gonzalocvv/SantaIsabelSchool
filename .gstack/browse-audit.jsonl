@@ -1,0 +1,4 @@
+{"ts":"2026-06-30T17:26:31.502Z","cmd":"viewport","args":"1200x630","origin":"about:blank","durationMs":6,"status":"ok","hasCookies":false,"mode":"launched"}
+{"ts":"2026-06-30T17:26:31.574Z","cmd":"goto","args":"file:///tmp/og-card.html","origin":"file:///tmp/og-card.html","durationMs":28,"status":"ok","hasCookies":false,"mode":"launched"}
+{"ts":"2026-06-30T17:26:32.398Z","cmd":"wait","args":"--networkidle","origin":"file:///tmp/og-card.html","durationMs":786,"status":"ok","hasCookies":false,"mode":"launched"}
+{"ts":"2026-06-30T17:26:32.498Z","cmd":"screenshot","args":"--viewport /tmp/og-card.png","origin":"file:///tmp/og-card.html","durationMs":38,"status":"ok","hasCookies":false,"mode":"launched"}

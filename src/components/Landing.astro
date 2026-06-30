@@ -1,0 +1,35 @@
+---
+import type { Lang } from '../i18n/ui';
+import DevBanner from './DevBanner.astro';
+import Header from './Header.astro';
+import Hero from './Hero.astro';
+import TrustBar from './TrustBar.astro';
+import About from './About.astro';
+import Pillars from './Pillars.astro';
+import Levels from './Levels.astro';
+import Programs from './Programs.astro';
+import Gallery from './Gallery.astro';
+import Contact from './Contact.astro';
+import Footer from './Footer.astro';
+import WhatsAppFloat from './WhatsAppFloat.astro';
+
+interface Props {
+  lang: Lang;
+}
+const { lang } = Astro.props;
+---
+
+<DevBanner />
+<Header lang={lang} />
+<main id="main">
+  <Hero lang={lang} />
+  <TrustBar lang={lang} />
+  <About lang={lang} />
+  <Pillars lang={lang} />
+  <Levels lang={lang} />
+  <Programs lang={lang} />
+  <Gallery lang={lang} />
+  <Contact lang={lang} />
+</main>
+<Footer lang={lang} />
+<WhatsAppFloat lang={lang} />

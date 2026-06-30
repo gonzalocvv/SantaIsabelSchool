@@ -1,0 +1,16 @@
+---
+import Base from '../layouts/Base.astro';
+import Button from '../components/Button.astro';
+---
+
+<Base lang="es" path="/404" noindex title="Página no encontrada · Santa Isabel School">
+  <main id="main" class="container-site flex min-h-[70vh] flex-col items-center justify-center text-center">
+    <p class="font-serif text-6xl font-bold text-accent">404</p>
+    <h1 class="mt-4 text-3xl">Página no encontrada</h1>
+    <p class="mt-3 text-muted">Page not found.</p>
+    <div class="mt-8 flex gap-3">
+      <Button href="/">Volver al inicio</Button>
+      <Button href="/en/" variant="outline">Home (EN)</Button>
+    </div>
+  </main>
+</Base>

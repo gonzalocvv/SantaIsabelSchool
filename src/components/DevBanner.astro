@@ -1,0 +1,17 @@
+---
+// Banner visible SOLO en desarrollo, listando los placeholders pendientes
+// (datos que tiene que pasar el colegio). En producción no se renderiza.
+import { pendingPlaceholders } from '../data/site';
+const pending = import.meta.env.DEV ? pendingPlaceholders() : [];
+---
+
+{
+  pending.length > 0 && (
+    <div class="bg-accent/15 border-b border-accent/40 text-ink">
+      <div class="container-site py-2 text-sm">
+        <strong class="font-semibold">Pendiente del colegio ({pending.length}):</strong>{' '}
+        <span class="text-muted">{pending.join(' · ')}</span>
+      </div>
+    </div>
+  )
+}

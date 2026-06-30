@@ -1,0 +1,25 @@
+---
+import type { Lang } from '../i18n/ui';
+import { whatsappLink, isTodo, site } from '../data/site';
+import { useTranslations } from '../i18n/utils';
+interface Props {
+  lang: Lang;
+}
+const { lang } = Astro.props;
+const ready = !isTodo(site.contact.whatsapp);
+const href = ready ? whatsappLink() : '#contact';
+const label = useTranslations(lang).contact.whatsappCta;
+---
+
+<a
+  href={href}
+  target={ready ? '_blank' : undefined}
+  rel={ready ? 'noopener noreferrer' : undefined}
+  aria-label={label}
+  title={label}
+  class="fixed bottom-5 right-5 z-50 flex h-14 w-14 items-center justify-center rounded-full bg-whatsapp text-white shadow-lift transition duration-200 ease-out-soft hover:scale-105 active:scale-95"
+>
+  <svg class="h-7 w-7" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+    <path d="M12 2a10 10 0 0 0-8.6 15l-1.3 4.7 4.8-1.3A10 10 0 1 0 12 2zm5.8 14.2c-.2.7-1.4 1.3-2 1.4-.5.1-1.2.1-1.9-.1-.4-.1-1-.3-1.7-.6-3-1.3-4.9-4.3-5-4.5-.2-.2-1.2-1.6-1.2-3s.7-2.1 1-2.4c.2-.3.5-.3.7-.3h.5c.2 0 .4 0 .6.5l.8 2c.1.2.1.4 0 .5l-.4.6c-.2.2-.3.4-.1.7.2.3.8 1.4 1.8 2.2 1.2 1.1 2.2 1.4 2.5 1.5.2.1.4.1.6-.1l.7-.9c.2-.2.4-.2.6-.1l1.9.9c.3.1.4.2.5.3 0 .2 0 .8-.2 1.5z" />
+  </svg>
+</a>

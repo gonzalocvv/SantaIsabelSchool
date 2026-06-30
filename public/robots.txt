@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://institutoeducativosantaisabel.edu.uy/sitemap-index.xml

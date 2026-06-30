@@ -1,0 +1,146 @@
+---
+import '../styles/global.css';
+import { site, isTodo } from '../data/site';
+import type { Lang } from '../i18n/ui';
+import { useTranslations } from '../i18n/utils';
+
+interface Props {
+  lang: Lang;
+  /** Ruta de esta página (para canonical/hreflang). ES: '/', EN: '/en/'. */
+  path: string;
+  /** Páginas que no deben indexarse (ej. 404): sin canonical/hreflang/OG. */
+  noindex?: boolean;
+  /** Override del <title> (por defecto usa el del diccionario). */
+  title?: string;
+}
+
+const { lang, path, noindex = false, title } = Astro.props;
+const pageTitle = title ?? useTranslations(lang).meta.title;
+const t = useTranslations(lang);
+
+const canonical = new URL(path, site.url).href;
+const esUrl = new URL('/', site.url).href;
+const enUrl = new URL('/en/', site.url).href;
+const ogImage = new URL('/og-image.jpg', site.url).href;
+
+// JSON-LD: solo incluimos los campos que ya no son placeholders.
+const jsonLd: Record<string, unknown> = {
+  '@context': 'https://schema.org',
+  '@type': 'School',
+  name: site.name,
+  alternateName: site.legalName,
+  url: site.url,
+  foundingDate: String(site.foundedYear),
+  sameAs: [site.social.instagram],
+  areaServed: `${site.location.city}, ${site.location.region}, Uruguay`,
+};
+if (!isTodo(site.contact.phone)) jsonLd.telephone = site.contact.phone;
+if (!isTodo(site.contact.email)) jsonLd.email = site.contact.email;
+if (!isTodo(site.contact.address)) {
+  jsonLd.address = {
+    '@type': 'PostalAddress',
+    streetAddress: site.contact.address,
+    addressLocality: site.location.city,
+    addressRegion: site.location.region,
+    addressCountry: site.location.country,
+  };
+}
+---
+
+<!doctype html>
+<html lang={lang}>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <script is:inline>document.documentElement.classList.add('js');</script>
+
+    <title>{pageTitle}</title>
+    <meta name="description" content={t.meta.description} />
+    <meta name="theme-color" content="#1B3A5B" />
+
+    {
+      noindex ? (
+        <meta name="robots" content="noindex, follow" />
+      ) : (
+        <Fragment>
+          <link rel="canonical" href={canonical} />
+          <link rel="alternate" hreflang="es" href={esUrl} />
+          <link rel="alternate" hreflang="en" href={enUrl} />
+          <link rel="alternate" hreflang="x-default" href={esUrl} />
+
+          {/* Open Graph / Twitter */}
+          <meta property="og:type" content="website" />
+          <meta property="og:site_name" content={site.name} />
+          <meta property="og:locale" content={lang === 'es' ? 'es_UY' : 'en_US'} />
+          <meta property="og:title" content={t.meta.title} />
+          <meta property="og:description" content={t.meta.description} />
+          <meta property="og:url" content={canonical} />
+          <meta property="og:image" content={ogImage} />
+          <meta property="og:image:alt" content={t.meta.ogAlt} />
+          <meta property="og:image:width" content="1200" />
+          <meta property="og:image:height" content="630" />
+          <meta name="twitter:card" content="summary_large_image" />
+          <meta name="twitter:title" content={t.meta.title} />
+          <meta name="twitter:description" content={t.meta.description} />
+          <meta name="twitter:image" content={ogImage} />
+          <meta name="twitter:image:alt" content={t.meta.ogAlt} />
+        </Fragment>
+      )
+    }
+
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+
+    <!-- Fuentes -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Source+Sans+3:wght@300;400;500;600;700&display=swap"
+    />
+
+    {
+      !noindex && (
+        <script
+          type="application/ld+json"
+          set:html={JSON.stringify(jsonLd).replace(/</g, '\\u003c')}
+        />
+      )
+    }
+  </head>
+  <body>
+    <a
+      href="#main"
+      class="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-[100] focus:rounded-md focus:bg-primary focus:px-4 focus:py-2 focus:text-white"
+    >
+      {t.nav.skip}
+    </a>
+    <slot />
+
+    <!-- Reveal on scroll (sutil, respeta prefers-reduced-motion vía CSS) -->
+    <script is:inline>
+      (() => {
+        const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        const els = document.querySelectorAll('.reveal');
+        if (reduce || !('IntersectionObserver' in window)) {
+          els.forEach((el) => el.classList.add('is-visible'));
+          return;
+        }
+        const io = new IntersectionObserver(
+          (entries) => {
+            entries.forEach((entry) => {
+              if (entry.isIntersecting) {
+                const el = entry.target;
+                const delay = el.getAttribute('data-reveal-delay');
+                if (delay) el.style.transitionDelay = delay + 'ms';
+                el.classList.add('is-visible');
+                io.unobserve(el);
+              }
+            });
+          },
+          { rootMargin: '0px 0px -10% 0px', threshold: 0.1 }
+        );
+        els.forEach((el) => io.observe(el));
+      })();
+    </script>
+  </body>
+</html>
