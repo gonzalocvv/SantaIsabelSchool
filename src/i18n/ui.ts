@@ -13,7 +13,7 @@ const es = {
     title: 'Santa Isabel School · Colegio bilingüe en Paso de los Toros',
     description:
       'Colegio bilingüe con certificación Cambridge en Paso de los Toros, Uruguay. Educación inicial, primaria, secundaria y bachillerato, con formación en valores.',
-    ogAlt: 'Santa Isabel School — Paso de los Toros',
+    ogAlt: 'Santa Isabel School — Paso de los Toros, Uruguay',
   },
   nav: {
     about: 'El colegio',
@@ -231,7 +231,7 @@ const en: Translation = {
     primary: 'Main',
   },
   hero: {
-    eyebrow: 'Paso de los Toros, Uruguay',
+    eyebrow: 'Paso de los Toros, Tacuarembó',
     title: 'Bilingual education with values, from Early Years to High School',
     subtitle:
       'At Santa Isabel School we combine learning, language and values: bilingual education with Cambridge certification, from Early Years to High School.',
@@ -246,7 +246,7 @@ const en: Translation = {
   trust: {
     items: [
       'Cambridge certification',
-      'Bilingual: half or full day',
+      'Bilingual: half-day or full-day',
       'Early Years to High School',
       'Values-based education',
     ],

@@ -85,6 +85,8 @@ const t = useTranslations(lang);
           alt={lang === 'es' ? 'Logo de Santa Isabel School' : 'Santa Isabel School logo'}
           widths={[360, 560]}
           sizes="360px"
+          loading="eager"
+          fetchpriority="high"
           class="h-auto w-full max-w-[320px] object-contain"
         />
       </div>
