@@ -78,6 +78,14 @@ const es = {
     missionLabel: 'Nuestra misión',
     mission: 'Educar para la vida, conectando conocimiento, valores y futuro.',
   },
+  stats: {
+    title: 'El colegio en números',
+    years: 'Años educando en Paso de los Toros',
+    levels: 'Niveles educativos',
+    modalities: 'Modalidades de jornada',
+    cambridgeValue: 'Cambridge',
+    cambridgeLabel: 'Certificación internacional de inglés',
+  },
   pillars: {
     eyebrow: 'Propuesta educativa',
     title: 'Cuatro pilares que nos definen',
@@ -282,6 +290,14 @@ const en: Translation = {
     },
     missionLabel: 'Our mission',
     mission: 'To educate for life, connecting knowledge, values and the future.',
+  },
+  stats: {
+    title: 'The school in numbers',
+    years: 'Years educating in Paso de los Toros',
+    levels: 'Educational levels',
+    modalities: 'Schedule formats',
+    cambridgeValue: 'Cambridge',
+    cambridgeLabel: 'International English certification',
   },
   pillars: {
     eyebrow: 'Educational approach',
