@@ -43,6 +43,24 @@
   }
 }
 
+/* Apertura suave del acordeón FAQ (solo navegadores con interpolate-size;
+   en el resto, apertura instantánea — el <details> funciona igual). */
+@supports (interpolate-size: allow-keywords) {
+  .faq-item {
+    interpolate-size: allow-keywords;
+  }
+  .faq-item::details-content {
+    block-size: 0;
+    overflow-y: clip;
+    transition:
+      block-size 0.3s cubic-bezier(0.23, 1, 0.32, 1),
+      content-visibility 0.3s allow-discrete;
+  }
+  .faq-item[open]::details-content {
+    block-size: auto;
+  }
+}
+
 /* Respetar la preferencia de movimiento reducido */
 @media (prefers-reduced-motion: reduce) {
   html {
