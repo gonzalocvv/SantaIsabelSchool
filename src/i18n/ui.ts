@@ -171,7 +171,11 @@ const es = {
   gallery: {
     eyebrow: 'Galería',
     title: 'Momentos reales de Santa Isabel School',
-    intro: 'Aprender no es quedarse quieto: es explorar, probar, descubrir y crecer.',
+    intro: 'Una mirada al día a día del colegio, directo de nuestro Instagram.',
+    quote: 'Aprender no es quedarse quieto: es explorar, probar, descubrir y crecer.',
+    panoramaAlt: 'Estudiantes de Santa Isabel School jugando al aire libre en el patio.',
+    followText: 'Novedades, eventos y momentos del colegio, primero en Instagram.',
+    followCta: 'Seguinos en Instagram',
   },
   admissions: {
     eyebrow: 'Proceso de admisión',
@@ -441,7 +445,11 @@ const en: Translation = {
   gallery: {
     eyebrow: 'Gallery',
     title: 'Real moments at Santa Isabel School',
-    intro: 'Learning is not standing still: it is exploring, trying, discovering and growing.',
+    intro: 'A glimpse of everyday school life, straight from our Instagram.',
+    quote: 'Learning is not standing still: it is exploring, trying, discovering and growing.',
+    panoramaAlt: 'Santa Isabel School students playing outdoors in the playground.',
+    followText: 'School news, events and moments — on Instagram first.',
+    followCta: 'Follow us on Instagram',
   },
   admissions: {
     eyebrow: 'Admissions process',
