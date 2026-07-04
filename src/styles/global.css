@@ -2,7 +2,8 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Fuentes (EB Garamond + Source Sans 3) se cargan vía <link> en Base.astro <head>. */
+/* Fuentes (EB Garamond Variable + Source Sans 3 Variable) self-hosted vía
+   @fontsource-variable, importadas en Base.astro. */
 
 @layer base {
   html {

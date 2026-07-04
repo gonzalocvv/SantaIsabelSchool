@@ -25,8 +25,9 @@ export default {
         whatsapp: '#0E7038', // verde con contraste AA para texto/icono blanco
       },
       fontFamily: {
-        serif: ['"EB Garamond"', 'Georgia', 'serif'],
-        sans: ['"Source Sans 3"', 'system-ui', 'sans-serif'],
+        // Nombres de las variantes variables de @fontsource-variable (self-hosted).
+        serif: ['"EB Garamond Variable"', 'Georgia', 'serif'],
+        sans: ['"Source Sans 3 Variable"', 'system-ui', 'sans-serif'],
       },
       maxWidth: {
         content: '72rem', // ~max-w-6xl para el contenedor principal
