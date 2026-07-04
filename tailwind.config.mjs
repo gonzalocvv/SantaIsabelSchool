@@ -41,6 +41,8 @@ export default {
       },
       transitionTimingFunction: {
         'out-soft': 'cubic-bezier(0.22, 1, 0.36, 1)',
+        // Ease-out fuerte para entradas (hovers/reveals con intención)
+        'out-strong': 'cubic-bezier(0.23, 1, 0.32, 1)',
       },
     },
   },

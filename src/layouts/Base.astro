@@ -117,31 +117,9 @@ if (!isTodo(site.contact.address)) {
     </a>
     <slot />
 
-    <!-- Reveal on scroll (sutil, respeta prefers-reduced-motion vía CSS) -->
-    <script is:inline>
-      (() => {
-        const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-        const els = document.querySelectorAll('.reveal');
-        if (reduce || !('IntersectionObserver' in window)) {
-          els.forEach((el) => el.classList.add('is-visible'));
-          return;
-        }
-        const io = new IntersectionObserver(
-          (entries) => {
-            entries.forEach((entry) => {
-              if (entry.isIntersecting) {
-                const el = entry.target;
-                const delay = el.getAttribute('data-reveal-delay');
-                if (delay) el.style.transitionDelay = delay + 'ms';
-                el.classList.add('is-visible');
-                io.unobserve(el);
-              }
-            });
-          },
-          { rootMargin: '0px 0px -10% 0px', threshold: 0.1 }
-        );
-        els.forEach((el) => io.observe(el));
-      })();
+    <!-- Reveal on scroll (Motion inView; respeta prefers-reduced-motion vía CSS y JS) -->
+    <script>
+      import '../scripts/reveal';
     </script>
   </body>
 </html>
