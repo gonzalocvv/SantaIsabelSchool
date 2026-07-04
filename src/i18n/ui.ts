@@ -184,6 +184,8 @@ const es = {
       error: 'Ocurrió un error al enviar. Probá de nuevo o escribinos por WhatsApp.',
     },
     whatsappCta: 'Escribinos por WhatsApp',
+    whatsappPrefill:
+      '¡Hola! Quiero información sobre admisiones de Santa Isabel School.',
     callCta: 'Llamar',
     labels: {
       address: 'Dirección',
@@ -387,6 +389,7 @@ const en: Translation = {
       error: 'Something went wrong. Please try again or message us on WhatsApp.',
     },
     whatsappCta: 'Message us on WhatsApp',
+    whatsappPrefill: 'Hi! I would like information about admissions at Santa Isabel School.',
     callCta: 'Call',
     labels: {
       address: 'Address',

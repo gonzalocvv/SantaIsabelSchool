@@ -29,6 +29,8 @@ const enUrl = new URL('/en/', site.url).href;
 const ogImage = new URL('/og-image.jpg', site.url).href;
 
 // JSON-LD: solo incluimos los campos que ya no son placeholders.
+// En modo demo el NAP se omite: los datos de contacto visibles son del
+// desarrollador y no deben publicarse como datos estructurados del colegio.
 const jsonLd: Record<string, unknown> = {
   '@context': 'https://schema.org',
   '@type': 'School',
@@ -39,16 +41,18 @@ const jsonLd: Record<string, unknown> = {
   sameAs: [site.social.instagram],
   areaServed: `${site.location.city}, ${site.location.region}, Uruguay`,
 };
-if (!isTodo(site.contact.phone)) jsonLd.telephone = site.contact.phone;
-if (!isTodo(site.contact.email)) jsonLd.email = site.contact.email;
-if (!isTodo(site.contact.address)) {
-  jsonLd.address = {
-    '@type': 'PostalAddress',
-    streetAddress: site.contact.address,
-    addressLocality: site.location.city,
-    addressRegion: site.location.region,
-    addressCountry: site.location.country,
-  };
+if (!site.demo) {
+  if (!isTodo(site.contact.phone)) jsonLd.telephone = site.contact.phone;
+  if (!isTodo(site.contact.email)) jsonLd.email = site.contact.email;
+  if (!isTodo(site.contact.address)) {
+    jsonLd.address = {
+      '@type': 'PostalAddress',
+      streetAddress: site.contact.address,
+      addressLocality: site.location.city,
+      addressRegion: site.location.region,
+      addressCountry: site.location.country,
+    };
+  }
 }
 ---
 

@@ -6,9 +6,10 @@ interface Props {
   lang: Lang;
 }
 const { lang } = Astro.props;
+const t = useTranslations(lang);
 const ready = !isTodo(site.contact.whatsapp);
-const href = ready ? whatsappLink() : '#contact';
-const label = useTranslations(lang).contact.whatsappCta;
+const href = ready ? whatsappLink(t.contact.whatsappPrefill) : '#contact';
+const label = t.contact.whatsappCta;
 ---
 
 <a
