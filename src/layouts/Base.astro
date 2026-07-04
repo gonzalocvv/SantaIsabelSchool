@@ -61,7 +61,13 @@ if (!site.demo) {
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <script is:inline>document.documentElement.classList.add('js');</script>
+    <script is:inline>
+      // La clase `js` habilita el ocultamiento inicial de `.reveal`. Se gatea a
+      // soporte de módulos ES: si el navegador no puede correr el script de
+      // reveal (módulo), el contenido queda visible en vez de oculto.
+      if ('noModule' in HTMLScriptElement.prototype)
+        document.documentElement.classList.add('js');
+    </script>
 
     <title>{pageTitle}</title>
     <meta name="description" content={t.meta.description} />
