@@ -48,8 +48,8 @@ const links = [
       <Button href="#contact" class="!px-5 !py-2 text-sm">{t.nav.cta}</Button>
     </div>
 
-    <!-- Mobile (details/summary, sin JS) -->
-    <details class="group relative lg:hidden">
+    <!-- Mobile (details/summary, sin JS; el script de abajo solo agrega cierres extra) -->
+    <details class="group relative lg:hidden" data-mobile-menu>
       <summary
         class="flex h-10 w-10 cursor-pointer list-none items-center justify-center rounded-md border border-edge text-primary [&::-webkit-details-marker]:hidden"
         aria-label={t.nav.menu}
@@ -85,3 +85,19 @@ const links = [
     </details>
   </nav>
 </header>
+
+<script>
+  // Cierres extra del menú móvil: Escape (devuelve el foco al botón) y clic afuera.
+  const menu = document.querySelector<HTMLDetailsElement>('details[data-mobile-menu]');
+  if (menu) {
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && menu.open) {
+        menu.open = false;
+        menu.querySelector('summary')?.focus();
+      }
+    });
+    document.addEventListener('pointerdown', (e) => {
+      if (menu.open && !menu.contains(e.target as Node)) menu.open = false;
+    });
+  }
+</script>

@@ -1,0 +1,81 @@
+---
+// Franja de números institucionales. Solo datos reales/derivables del material
+// oficial (nada inventado): años desde la fundación, niveles, modalidades y
+// la certificación Cambridge como diferencial.
+// El HTML trae el valor final (SEO, sin CLS, reduced-motion); el contador
+// anima 0→N recién al entrar al viewport.
+import type { Lang } from '../i18n/ui';
+import { useTranslations } from '../i18n/utils';
+import Section from './Section.astro';
+import { site } from '../data/site';
+
+interface Props {
+  lang: Lang;
+}
+const { lang } = Astro.props;
+const s = useTranslations(lang).stats;
+
+// Calculado en build (se actualiza con cada deploy).
+const years = new Date().getFullYear() - site.foundedYear;
+
+const numbers = [
+  { value: years, label: s.years },
+  { value: 4, label: s.levels },
+  { value: 2, label: s.modalities },
+];
+---
+
+<Section id="stats" class="border-y border-edge bg-surface">
+  <h2 class="sr-only">{s.title}</h2>
+  <div class="grid grid-cols-2 gap-x-6 gap-y-10 text-center lg:grid-cols-4" data-reveal-group>
+    {
+      numbers.map((it) => (
+        <div class="reveal">
+          <p class="font-serif text-5xl font-semibold tabular-nums text-primary sm:text-6xl">
+            <span data-count-to={it.value} class="inline-block min-w-[2ch]">
+              {it.value}
+            </span>
+          </p>
+          <p class="mx-auto mt-2 max-w-[16ch] text-sm font-semibold uppercase tracking-wide text-muted">
+            {it.label}
+          </p>
+        </div>
+      ))
+    }
+    <div class="reveal">
+      <p class="font-serif text-4xl font-semibold leading-[1.15] text-primary sm:text-5xl">
+        {s.cambridgeValue}
+      </p>
+      <p class="mx-auto mt-2 max-w-[16ch] text-sm font-semibold uppercase tracking-wide text-muted">
+        {s.cambridgeLabel}
+      </p>
+    </div>
+  </div>
+</Section>
+
+<script>
+  import { animate, inView } from 'motion';
+
+  const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (!reduce) {
+    document.querySelectorAll<HTMLElement>('[data-count-to]').forEach((el, i) => {
+      const to = Number(el.dataset.countTo ?? '0');
+      if (!Number.isFinite(to) || to <= 0) return;
+      el.textContent = '0';
+      inView(
+        el,
+        () => {
+          animate(0, to, {
+            duration: 1.2,
+            delay: i * 0.08,
+            ease: [0.23, 1, 0.32, 1],
+            onUpdate: (v) => {
+              el.textContent = String(Math.round(v));
+            },
+          });
+        },
+        { amount: 0.5 }
+      );
+    });
+  }
+</script>

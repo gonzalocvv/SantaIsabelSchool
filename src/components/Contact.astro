@@ -21,7 +21,7 @@ const info = [
   { label: c.labels.address, value: site.contact.address },
   { label: c.labels.phone, value: site.contact.phone },
   { label: c.labels.email, value: site.contact.email },
-  { label: c.labels.hours, value: site.contact.hours },
+  { label: c.labels.hours, value: site.contact.hours[lang] },
 ];
 const pending = lang === 'es' ? 'A confirmar' : 'To be confirmed';
 ---
@@ -143,7 +143,7 @@ const pending = lang === 'es' ? 'A confirmar' : 'To be confirmed';
         </dl>
         <div class="mt-6 flex flex-wrap gap-3">
           <Button
-            href={waReady ? whatsappLink() : undefined}
+            href={waReady ? whatsappLink(c.whatsappPrefill) : undefined}
             variant="whatsapp"
             disabled={!waReady}
             aria-disabled={!waReady ? 'true' : undefined}

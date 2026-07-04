@@ -1,7 +1,17 @@
 // Configuración central del sitio.
-// Los campos marcados con TODO son PLACEHOLDERS: completarlos con el material
-// que pase el colegio (datos de contacto, admisiones, claves de servicios).
-// Mientras haya placeholders, se muestra un banner de aviso en desarrollo.
+//
+// MODO DEMO (`demo: true`): los datos de contacto son de Gonzalo (el
+// desarrollador) para que TODO funcione en la demo comercial: el formulario
+// envía de verdad, el WhatsApp abre un chat real y el mapa carga. Mientras
+// `demo` esté activo, el JSON-LD público NO emite teléfono/email/dirección
+// (para no publicar datos personales como NAP del colegio).
+//
+// CÓMO HACER EL SWAP A DATOS REALES (cuando el colegio pase su info):
+//   1. Reemplazar los valores marcados `// DEMO:` de `contact` y, si aplica,
+//      crear una access key de Web3Forms con el email oficial del colegio.
+//   2. Poner `demo: false` → el JSON-LD emite el NAP completo automáticamente.
+//   3. Si algún dato aún no está, volver a ponerle `TODO('etiqueta')`: la UI
+//      degrada sola (form inactivo, botón deshabilitado, "A confirmar").
 
 const TODO = (label: string) => `TODO::${label}`;
 
@@ -12,6 +22,7 @@ export const site = {
   // Sincronizado con astro.config (`site`). Cae al dominio live actual.
   url: import.meta.env.SITE ?? 'https://santaisabelschool.pages.dev',
   foundedYear: 1998, // según el logo institucional oficial ("EST. 1998")
+  demo: true, // ← al cerrar la venta y cargar datos reales: false
   location: {
     city: 'Paso de los Toros',
     region: 'Tacuarembó',
@@ -22,20 +33,23 @@ export const site = {
     instagramHandle: '@santaisabelschool.pdlt',
   },
 
-  // --- PLACEHOLDERS: completar con el colegio ---
   contact: {
-    address: TODO('dirección exacta'),
-    phone: TODO('teléfono'),
+    address: 'Santa Isabel de Paso de los Toros, Tacuarembó', // DEMO: zona real, falta calle y número
+    phone: '+598 92 132 629', // DEMO: teléfono de Gonzalo
     // WhatsApp en formato internacional sin símbolos: ej. 59899123456
-    whatsapp: TODO('whatsapp-internacional'),
-    email: TODO('email oficial'),
-    hours: TODO('horarios de atención'),
+    whatsapp: '59892132629', // DEMO: WhatsApp de Gonzalo
+    email: 'gcabrera3210@gmail.com', // DEMO: email de Gonzalo
+    hours: {
+      es: 'Lunes a viernes · 8:00 a 17:00 h', // DEMO: horario plausible, confirmar con el colegio
+      en: 'Monday to Friday · 8:00 am – 5:00 pm',
+    },
     // Embed de Google Maps (src del iframe):
-    mapsEmbedSrc: TODO('maps-embed-src'),
+    mapsEmbedSrc:
+      'https://www.google.com/maps?q=Paso+de+los+Toros,+Tacuarembo,+Uruguay&z=14&output=embed', // DEMO: centrado en la ciudad, falta la dirección exacta
   },
   forms: {
-    // Crear gratis en https://web3forms.com y pegar la access key:
-    web3formsAccessKey: TODO('web3forms-access-key'),
+    // Access key de Web3Forms (pública por diseño: viaja en el HTML del form).
+    web3formsAccessKey: '68a1abbe-173e-4771-8526-70bfb009b01a', // DEMO: llega al email de Gonzalo
   },
 } as const;
 

@@ -2,7 +2,8 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Fuentes (EB Garamond + Source Sans 3) se cargan vía <link> en Base.astro <head>. */
+/* Fuentes (EB Garamond Variable + Source Sans 3 Variable) self-hosted vía
+   @fontsource-variable, importadas en Base.astro. */
 
 @layer base {
   html {
@@ -39,6 +40,24 @@
   html.js .reveal.is-visible {
     opacity: 1;
     transform: none;
+  }
+}
+
+/* Apertura suave del acordeón FAQ (solo navegadores con interpolate-size;
+   en el resto, apertura instantánea — el <details> funciona igual). */
+@supports (interpolate-size: allow-keywords) {
+  .faq-item {
+    interpolate-size: allow-keywords;
+  }
+  .faq-item::details-content {
+    block-size: 0;
+    overflow-y: clip;
+    transition:
+      block-size 0.3s cubic-bezier(0.23, 1, 0.32, 1),
+      content-visibility 0.3s allow-discrete;
+  }
+  .faq-item[open]::details-content {
+    block-size: auto;
   }
 }
 

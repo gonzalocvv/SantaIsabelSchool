@@ -13,7 +13,7 @@ const es = {
     title: 'Santa Isabel School · Colegio bilingüe en Paso de los Toros',
     description:
       'Colegio bilingüe con certificación Cambridge en Paso de los Toros, Uruguay. Educación inicial, primaria, secundaria y bachillerato, con formación en valores.',
-    ogAlt: 'Santa Isabel School — Paso de los Toros',
+    ogAlt: 'Santa Isabel School — Paso de los Toros, Uruguay',
   },
   nav: {
     about: 'El colegio',
@@ -77,6 +77,14 @@ const es = {
     },
     missionLabel: 'Nuestra misión',
     mission: 'Educar para la vida, conectando conocimiento, valores y futuro.',
+  },
+  stats: {
+    title: 'El colegio en números',
+    years: 'Años educando en Paso de los Toros',
+    levels: 'Niveles educativos',
+    modalities: 'Modalidades de jornada',
+    cambridgeValue: 'Cambridge',
+    cambridgeLabel: 'Certificación internacional de inglés',
   },
   pillars: {
     eyebrow: 'Propuesta educativa',
@@ -163,7 +171,68 @@ const es = {
   gallery: {
     eyebrow: 'Galería',
     title: 'Momentos reales de Santa Isabel School',
-    intro: 'Aprender no es quedarse quieto: es explorar, probar, descubrir y crecer.',
+    intro: 'Una mirada al día a día del colegio, directo de nuestro Instagram.',
+    quote: 'Aprender no es quedarse quieto: es explorar, probar, descubrir y crecer.',
+    panoramaAlt: 'Estudiantes de Santa Isabel School jugando al aire libre en el patio.',
+    followText: 'Novedades, eventos y momentos del colegio, primero en Instagram.',
+    followCta: 'Seguinos en Instagram',
+  },
+  admissions: {
+    eyebrow: 'Proceso de admisión',
+    title: 'Empezar es simple',
+    intro:
+      'Acompañamos a cada familia en el camino de conocer el colegio y sumarse a la comunidad.',
+    steps: [
+      {
+        n: '01',
+        title: 'Conocenos',
+        text: 'Explorá la propuesta educativa y seguinos en Instagram para ver el día a día del colegio.',
+      },
+      {
+        n: '02',
+        title: 'Agendá una visita',
+        text: 'Escribinos por el formulario o por WhatsApp y coordinamos un encuentro.',
+      },
+      {
+        n: '03',
+        title: 'Inscripción',
+        text: 'Elegí el nivel y la modalidad de jornada, y completá la inscripción con nuestro equipo.',
+      },
+    ],
+    cta: 'Solicitá información',
+    ctaWhatsapp: 'Coordinar por WhatsApp',
+  },
+  faq: {
+    eyebrow: 'Preguntas frecuentes',
+    title: 'Respuestas para las familias',
+    intro:
+      '¿No encontrás tu respuesta? Escribinos por el formulario o por WhatsApp y te contestamos a la brevedad.',
+    items: [
+      {
+        q: '¿Qué niveles ofrece Santa Isabel School?',
+        a: 'Una trayectoria completa en un mismo lugar: Educación Inicial (SantaKids), Primaria, Secundaria y Bachillerato.',
+      },
+      {
+        q: '¿Qué modalidades de jornada existen?',
+        a: 'Todos los niveles pueden cursarse en media jornada o doble jornada bilingüe. Cada familia elige la modalidad que mejor se adapta a su ritmo y necesidades.',
+      },
+      {
+        q: '¿Cómo se enseña el inglés?',
+        a: 'De forma natural y contextual, integrado a todas las áreas desde Inicial. Un equipo pedagógico especializado prepara a los estudiantes para rendir los exámenes internacionales de Cambridge.',
+      },
+      {
+        q: '¿Cómo es la propuesta de Educación Inicial?',
+        a: 'SantaKids trabaja con ambientes preparados que invitan a explorar, elegir y aprender con autonomía, inspirados en María Montessori y Loris Malaguzzi: el ambiente como "tercer maestro".',
+      },
+      {
+        q: '¿Cómo solicito información o una visita?',
+        a: 'Completá el formulario de contacto o escribinos por WhatsApp y coordinamos un encuentro para conocer el colegio. Te respondemos a la brevedad.',
+      },
+      {
+        q: '¿Desde cuándo funciona el colegio?',
+        a: 'Santa Isabel School está establecido desde 1998 en Paso de los Toros, Tacuarembó, y acompaña a las familias de la zona desde entonces.',
+      },
+    ],
   },
   contact: {
     eyebrow: 'Admisiones',
@@ -184,6 +253,8 @@ const es = {
       error: 'Ocurrió un error al enviar. Probá de nuevo o escribinos por WhatsApp.',
     },
     whatsappCta: 'Escribinos por WhatsApp',
+    whatsappPrefill:
+      '¡Hola! Quiero información sobre admisiones de Santa Isabel School.',
     callCta: 'Llamar',
     labels: {
       address: 'Dirección',
@@ -231,7 +302,7 @@ const en: Translation = {
     primary: 'Main',
   },
   hero: {
-    eyebrow: 'Paso de los Toros, Uruguay',
+    eyebrow: 'Paso de los Toros, Tacuarembó',
     title: 'Bilingual education with values, from Early Years to High School',
     subtitle:
       'At Santa Isabel School we combine learning, language and values: bilingual education with Cambridge certification, from Early Years to High School.',
@@ -246,7 +317,7 @@ const en: Translation = {
   trust: {
     items: [
       'Cambridge certification',
-      'Bilingual: half or full day',
+      'Bilingual: half-day or full-day',
       'Early Years to High School',
       'Values-based education',
     ],
@@ -280,6 +351,14 @@ const en: Translation = {
     },
     missionLabel: 'Our mission',
     mission: 'To educate for life, connecting knowledge, values and the future.',
+  },
+  stats: {
+    title: 'The school in numbers',
+    years: 'Years educating in Paso de los Toros',
+    levels: 'Educational levels',
+    modalities: 'Schedule formats',
+    cambridgeValue: 'Cambridge',
+    cambridgeLabel: 'International English certification',
   },
   pillars: {
     eyebrow: 'Educational approach',
@@ -366,7 +445,68 @@ const en: Translation = {
   gallery: {
     eyebrow: 'Gallery',
     title: 'Real moments at Santa Isabel School',
-    intro: 'Learning is not standing still: it is exploring, trying, discovering and growing.',
+    intro: 'A glimpse of everyday school life, straight from our Instagram.',
+    quote: 'Learning is not standing still: it is exploring, trying, discovering and growing.',
+    panoramaAlt: 'Santa Isabel School students playing outdoors in the playground.',
+    followText: 'School news, events and moments — on Instagram first.',
+    followCta: 'Follow us on Instagram',
+  },
+  admissions: {
+    eyebrow: 'Admissions process',
+    title: 'Getting started is simple',
+    intro:
+      'We walk alongside every family on the path to getting to know the school and joining our community.',
+    steps: [
+      {
+        n: '01',
+        title: 'Get to know us',
+        text: 'Explore our educational approach and follow us on Instagram to see everyday school life.',
+      },
+      {
+        n: '02',
+        title: 'Book a visit',
+        text: 'Reach out through the form or WhatsApp and we will arrange a meeting.',
+      },
+      {
+        n: '03',
+        title: 'Enrolment',
+        text: 'Choose the level and schedule format, and complete enrolment with our team.',
+      },
+    ],
+    cta: 'Request information',
+    ctaWhatsapp: 'Chat on WhatsApp',
+  },
+  faq: {
+    eyebrow: 'FAQ',
+    title: 'Answers for families',
+    intro:
+      'Can’t find your answer? Reach out through the form or WhatsApp and we’ll get back to you shortly.',
+    items: [
+      {
+        q: 'Which levels does Santa Isabel School offer?',
+        a: 'A complete journey in one place: Early Years (SantaKids), Primary, Secondary and High School.',
+      },
+      {
+        q: 'Which schedule formats are available?',
+        a: 'Every level can be attended half-day or full-day bilingual. Each family chooses the format that best suits their pace and needs.',
+      },
+      {
+        q: 'How is English taught?',
+        a: 'Naturally and in context, integrated across all areas from Early Years. A specialised teaching team prepares students to sit the Cambridge international exams.',
+      },
+      {
+        q: 'What is the Early Years approach like?',
+        a: 'SantaKids works with prepared environments that invite children to explore, choose and learn with autonomy, inspired by María Montessori and Loris Malaguzzi: the environment as the "third teacher".',
+      },
+      {
+        q: 'How do I request information or a visit?',
+        a: 'Fill in the contact form or message us on WhatsApp and we will arrange a meeting to get to know the school. We reply shortly.',
+      },
+      {
+        q: 'How long has the school been running?',
+        a: 'Santa Isabel School was established in 1998 in Paso de los Toros, Tacuarembó, and has supported local families ever since.',
+      },
+    ],
   },
   contact: {
     eyebrow: 'Admissions',
@@ -387,6 +527,7 @@ const en: Translation = {
       error: 'Something went wrong. Please try again or message us on WhatsApp.',
     },
     whatsappCta: 'Message us on WhatsApp',
+    whatsappPrefill: 'Hi! I would like information about admissions at Santa Isabel School.',
     callCta: 'Call',
     labels: {
       address: 'Address',

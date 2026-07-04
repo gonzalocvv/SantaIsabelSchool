@@ -1,5 +1,10 @@
 ---
 import '../styles/global.css';
+// Fuentes self-hosted (antes Google Fonts): sin conexiones a terceros ni CSS render-blocking externo.
+import '@fontsource-variable/eb-garamond';
+import '@fontsource-variable/source-sans-3';
+import ebGaramondWoff2 from '@fontsource-variable/eb-garamond/files/eb-garamond-latin-wght-normal.woff2?url';
+import sourceSans3Woff2 from '@fontsource-variable/source-sans-3/files/source-sans-3-latin-wght-normal.woff2?url';
 import { site, isTodo } from '../data/site';
 import type { Lang } from '../i18n/ui';
 import { useTranslations } from '../i18n/utils';
@@ -24,6 +29,8 @@ const enUrl = new URL('/en/', site.url).href;
 const ogImage = new URL('/og-image.jpg', site.url).href;
 
 // JSON-LD: solo incluimos los campos que ya no son placeholders.
+// En modo demo el NAP se omite: los datos de contacto visibles son del
+// desarrollador y no deben publicarse como datos estructurados del colegio.
 const jsonLd: Record<string, unknown> = {
   '@context': 'https://schema.org',
   '@type': 'School',
@@ -34,16 +41,18 @@ const jsonLd: Record<string, unknown> = {
   sameAs: [site.social.instagram],
   areaServed: `${site.location.city}, ${site.location.region}, Uruguay`,
 };
-if (!isTodo(site.contact.phone)) jsonLd.telephone = site.contact.phone;
-if (!isTodo(site.contact.email)) jsonLd.email = site.contact.email;
-if (!isTodo(site.contact.address)) {
-  jsonLd.address = {
-    '@type': 'PostalAddress',
-    streetAddress: site.contact.address,
-    addressLocality: site.location.city,
-    addressRegion: site.location.region,
-    addressCountry: site.location.country,
-  };
+if (!site.demo) {
+  if (!isTodo(site.contact.phone)) jsonLd.telephone = site.contact.phone;
+  if (!isTodo(site.contact.email)) jsonLd.email = site.contact.email;
+  if (!isTodo(site.contact.address)) {
+    jsonLd.address = {
+      '@type': 'PostalAddress',
+      streetAddress: site.contact.address,
+      addressLocality: site.location.city,
+      addressRegion: site.location.region,
+      addressCountry: site.location.country,
+    };
+  }
 }
 ---
 
@@ -52,7 +61,13 @@ if (!isTodo(site.contact.address)) {
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <script is:inline>document.documentElement.classList.add('js');</script>
+    <script is:inline>
+      // La clase `js` habilita el ocultamiento inicial de `.reveal`. Se gatea a
+      // soporte de módulos ES: si el navegador no puede correr el script de
+      // reveal (módulo), el contenido queda visible en vez de oculto.
+      if ('noModule' in HTMLScriptElement.prototype)
+        document.documentElement.classList.add('js');
+    </script>
 
     <title>{pageTitle}</title>
     <meta name="description" content={t.meta.description} />
@@ -89,18 +104,18 @@ if (!isTodo(site.contact.address)) {
     }
 
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <link rel="manifest" href="/site.webmanifest" />
 
-    <!-- Fuentes -->
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      rel="stylesheet"
-      href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Source+Sans+3:wght@300;400;500;600;700&display=swap"
-    />
+    <!-- Fuentes críticas (subset latin): preload para mejorar LCP -->
+    <link rel="preload" as="font" type="font/woff2" crossorigin href={ebGaramondWoff2} />
+    <link rel="preload" as="font" type="font/woff2" crossorigin href={sourceSans3Woff2} />
 
     {
       !noindex && (
         <script
+          is:inline
           type="application/ld+json"
           set:html={JSON.stringify(jsonLd).replace(/</g, '\\u003c')}
         />
@@ -116,31 +131,9 @@ if (!isTodo(site.contact.address)) {
     </a>
     <slot />
 
-    <!-- Reveal on scroll (sutil, respeta prefers-reduced-motion vía CSS) -->
-    <script is:inline>
-      (() => {
-        const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-        const els = document.querySelectorAll('.reveal');
-        if (reduce || !('IntersectionObserver' in window)) {
-          els.forEach((el) => el.classList.add('is-visible'));
-          return;
-        }
-        const io = new IntersectionObserver(
-          (entries) => {
-            entries.forEach((entry) => {
-              if (entry.isIntersecting) {
-                const el = entry.target;
-                const delay = el.getAttribute('data-reveal-delay');
-                if (delay) el.style.transitionDelay = delay + 'ms';
-                el.classList.add('is-visible');
-                io.unobserve(el);
-              }
-            });
-          },
-          { rootMargin: '0px 0px -10% 0px', threshold: 0.1 }
-        );
-        els.forEach((el) => io.observe(el));
-      })();
+    <!-- Reveal on scroll (Motion inView; respeta prefers-reduced-motion vía CSS y JS) -->
+    <script>
+      import '../scripts/reveal';
     </script>
   </body>
 </html>
